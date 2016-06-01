@@ -10,14 +10,16 @@ double femur = 4.2;
 double centerx = 3;
 double centery = 5.25;
 
-void setup() {
+void setup() 
+{
 
     Serial.begin(9600);
     // put your setup code here, to run once:
 
 }
 
-void ink1(double x, double y, double z) {
+void ink1(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -45,7 +47,8 @@ void ink1(double x, double y, double z) {
     //  delay((1.2)*tt);
 }
 
-void ink2(double x, double y, double z) {
+void ink2(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -73,7 +76,8 @@ void ink2(double x, double y, double z) {
     //  delay((1.2)*tt);
 }
 
-void ink3(double x, double y, double z) {
+void ink3(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -101,7 +105,8 @@ void ink3(double x, double y, double z) {
     //delay((1.2)*tt);
 }
 
-void ink4(double x, double y, double z) {
+void ink4(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -129,7 +134,8 @@ void ink4(double x, double y, double z) {
     //  delay((1.2)*tt);
 }
 
-void ink1m(double x, double y, double z) {
+void ink1m(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -158,7 +164,8 @@ void ink1m(double x, double y, double z) {
     //  delay((1.2)*tt);
 }
 
-void ink2m(double x, double y, double z) {
+void ink2m(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -186,7 +193,8 @@ void ink2m(double x, double y, double z) {
     //  delay((1.2)*tt);
 }
 
-void ink3m(double x, double y, double z) {
+void ink3m(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -217,7 +225,8 @@ void ink3m(double x, double y, double z) {
     //delay((1.2)*tt);
 }
 
-void ink4m(double x, double y, double z) {
+void ink4m(double x, double y, double z) 
+{
 
     double L1 = sqrt(sq(x) + sq(y));
     double gamma = (atan2(x, y) / PI) * 180; // Gamma
@@ -245,7 +254,8 @@ void ink4m(double x, double y, double z) {
     //  delay((1.2)*tt);
 }
 
-void moveall(double x, double y, double z) {
+void moveall(double x, double y, double z) // twist the upper body
+{
 
     double x1 = x + centerx;
     double y1 = y + centery;
@@ -266,7 +276,8 @@ void moveall(double x, double y, double z) {
 
 }
 
-void movebody(double x, double y, double z) {
+void movebody(double x, double y, double z) //translate the upper body
+{
 
     double x1 = x + centerx;
     double y1 = y + centery;
@@ -287,13 +298,14 @@ void movebody(double x, double y, double z) {
 
 }
 
-void moveup(double z_ini, double z_f) {
+void moveup(double z_ini, double z_f) //WIP
+{
     double z_diff = z_ini - z_f;
 
 }
 
-void moveit(int snum, int pos) {
-
+void moveit(int snum, int pos)  //Function to convert the sommand into code that the servo controller understands
+{
     Serial.print("#");
     Serial.print(snum);
     Serial.print("P");
@@ -301,13 +313,15 @@ void moveit(int snum, int pos) {
 
 }
 
-void delayit(int tt) {
+void delayit(int tt) // Function that generates the time to be taken to reach a position by the servos from the last position
+{
     Serial.print('T');
     Serial.print(tt);
     Serial.println("");
     delay(tt * 1.2);
 }
-void bodycircle(float z, int tt) {
+void bodycircle(float z, int tt) // hardcoded function to make the quad move in a circular fashion
+{
 
     ink4m(5, 5, z);
     ink1m(5, 5, 2 * z);
@@ -338,19 +352,11 @@ void bodycircle(float z, int tt) {
 
 }
 
-void loop() {
+void loop() 
+{
     /* for reference
-    x2 = -x+centerx;
-    y2 = -y+centery;
-  
-    x1 = x+centerx;
-    y1 = y+centery;
-  
-    x4 = x+centerx;
-    y4 = y+centery;
-       
-    x3 = - x + centerx;
-    y3 = -y + centery;
+    x1 = x+centerx   ||   x2 = -x+centerx   ||   x3 = - x + centerx   ||   x4 = x+centerx 
+    y1 = y+centery   ||   y2 = -y+centery   ||   y3 = -y + centery    ||   y4 = y+centery
     */
 
     moveall(1, 0, 3);
@@ -390,16 +396,4 @@ void loop() {
     ink4m(1, 5.25, 4);
     delayit(600);
 
-    /*
-    ink1(4,2,2);
-    ink3(4,2,2);
-    delayit(600);
-
-
-    ink2(4,2,4);
-    ink4(4,2,4);
-    delayit(600);
-    */
-    //  ink3m(3,5.25,3);
-    //  delayit(700);
 }
